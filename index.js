@@ -46,4 +46,23 @@ const horizontals = Array(cells - 1)
     .fill(null)
     .map(() => Array(cells).fill(false));
 
+const startRow = Math.floor(Math.random() * cells);
+const startColumn = Math.floor(Math.random() * cells);
 
+const stepThroughCell = (row, column) => {
+    // If I have visited the cell at [row,column], then return
+
+    // Mark this cell as being visited
+
+    // For each neighbor...
+
+    // See if that neighbor is out of bonds
+
+    // If we have visited that neighbor, continue to next neighbor
+
+    // Remove a wall from either horinztols or verticals
+
+    // Visit that next cell
+};
+
+stepThroughCell(startRow, startColumn)
