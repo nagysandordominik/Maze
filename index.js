@@ -71,21 +71,28 @@ const stepThroughCell = (row, column) => {
     // Mark this cell as being visited
     grid[row][column] = true;
     // Assemble randomly-ordered list of neighbors
-    const neighbors = [
+    const neighbors = shuffle([
         [row - 1, column],
         [row, column + 1],
         [row + 1, column],
         [row, column - 1]
-    ];
+    ]);
 
     // For each neighbor...
+    for (let neighbor of neighbors) {
+        const [nextRow, nextColumn] = neighbor;
 
-    // See if that neighbor is out of bonds
+        // See if that neighbor is out of bonds
+        if (nextRow < 0 || nextRow >= cells || nextColumn < 0 || nextColumn >= cells) {
+            continue;
+        }
+        // If we have visited that neighbor, continue to next neighbor
+        if (grid[nextRow][nextColumn]) {
+            continue;
+        }
+        // Remove a wall from either horinztols or verticals
 
-    // If we have visited that neighbor, continue to next neighbor
-
-    // Remove a wall from either horinztols or verticals
-
+    }
     // Visit that next cell
 };
 
