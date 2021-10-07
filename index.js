@@ -12,7 +12,7 @@ const render = Render.create({
     element: document.body,
     engine: engine,
     options: {
-        wireframes: true,
+        wireframes: false,
         width,
         height
     }
@@ -28,10 +28,10 @@ World.add(world, MouseConstraint.create(engine, {
 // Walls
 
 const walls = [
-    Bodies.rectangle(width / 2, 0, width, 10, { isStatic: true }),
-    Bodies.rectangle(width / 2, height, width, 10, { isStatic: true }),
-    Bodies.rectangle(0, height / 2, 10, height, { isStatic: true }),
-    Bodies.rectangle(width, height / 2, 10, height, { isStatic: true })
+    Bodies.rectangle(width / 2, 0, width, 10, { isStatic: true }, { render: { fillStyle: 'red' } }),
+    Bodies.rectangle(width / 2, height, width, 10, { isStatic: true }, { render: { fillStyle: 'red' } }),
+    Bodies.rectangle(0, height / 2, 10, height, { isStatic: true }, { render: { fillStyle: 'red' } }),
+    Bodies.rectangle(width, height / 2, 10, height, { isStatic: true }, { render: { fillStyle: 'red' } }),
 
 ];
 World.add(world, walls)
