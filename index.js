@@ -1,6 +1,6 @@
 const { Engine, Render, Runner, World, Bodies, } = Matter;
 
-const cells = 5;
+const cells = 3;
 const width = 600;
 const height = 600;
 
@@ -72,10 +72,10 @@ const stepThroughCell = (row, column) => {
     grid[row][column] = true;
     // Assemble randomly-ordered list of neighbors
     const neighbors = shuffle([
-        [row - 1, column, 'up'],
-        [row, column + 1, 'right'],
+        // [row - 1, column, 'up'],
+        // [row, column + 1, 'right'],
         [row + 1, column, 'down'],
-        [row, column - 1, 'left']
+        // [row, column - 1, 'left']
     ]);
 
     // For each neighbor...
@@ -83,7 +83,8 @@ const stepThroughCell = (row, column) => {
         const [nextRow, nextColumn, direction] = neighbor;
 
         // See if that neighbor is out of bonds
-        if (nextRow < 0 ||
+        if (
+            nextRow < 0 ||
             nextRow >= cells ||
             nextColumn < 0 ||
             nextColumn >= cells
@@ -97,11 +98,31 @@ const stepThroughCell = (row, column) => {
         // Remove a wall from either horinztols or verticals
         if (direction === 'left') {
             verticals[row][column - 1] = true;
-        } else if (direction = 'right') {
+        } else if (direction === 'right') {
             verticals[row][column] = true;
+        } else if (direction === 'up') {
+            horizontals[row - 1][column] = true;
+        } else if (direction === 'down') {
+            horizontals[row][column] = true;
         }
+
+
+        stepThroughCell(nextRow, nextColumn);
     }
     // Visit that next cell
+
 };
 
+
 stepThroughCell(startRow, startColumn);
+horizontals.forEach(row => {
+    row.forEach((open) => {
+        if (open) {
+            return;
+        }
+
+        const wall = Bodies.rectangle();
+
+    });
+});
+
