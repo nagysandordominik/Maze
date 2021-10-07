@@ -116,6 +116,7 @@ const stepThroughCell = (row, column) => {
 
 stepThroughCell(startRow, startColumn);
 
+// Drawing horizontal segments 
 horizontals.forEach((row, rowIndex) => {
     row.forEach((open, columnIndex) => {
         if (open) {
@@ -126,7 +127,7 @@ horizontals.forEach((row, rowIndex) => {
             columnIndex * unitLength + unitLength / 2,
             rowIndex * unitLength + unitLength,
             unitLength,
-            10,
+            5,
             {
                 isStatic: true
             }
@@ -134,4 +135,22 @@ horizontals.forEach((row, rowIndex) => {
         World.add(world, wall);
     });
 });
+// Drawing vertical segments
+verticals.forEach((row, rowIndex) => {
+    row.forEach((open, columnIndex) => {
+        if (open) {
+            return;
+        }
+        const wall = Bodies.rectangle(
+            columnIndex * unitLength + unitLength,
+            rowIndex * unitLength + unitLength / 2,
+            5,
+            unitLength,
+            {
+                isStatic: true
+            }
+        );
+        World.add(world, wall);
 
+    });
+});
