@@ -170,9 +170,20 @@ World.add(world, goal);
 
 // Ball
 
-const ball = Bodies.circle(
-    unitLength / 2,
-    unitLength / 2,
-    unitLength / 3
-);
-World.add(world, ball)
+const ball = Bodies.circle(unitLength / 2, unitLength / 2, unitLength / 3);
+World.add(world, ball);
+
+document.addEventListener('keydown', event => {
+    if (event.keyCode === 87) {
+
+    }
+    if (event.keyCode === 68) {
+
+    }
+    if (event.keyCode === 83) {
+
+    }
+    if (event.keyCode === 65) {
+
+    }
+});
