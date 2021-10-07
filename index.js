@@ -1,6 +1,6 @@
-const { Engine, Render, Runner, World, Bodies } = Matter;
+const { Engine, Render, Runner, World, Bodies, Body, MouseConstraint, Mouse } = Matter;
 
-const cells = 15;
+const cells = 10;
 const width = 600;
 const height = 600;
 
@@ -21,15 +21,17 @@ const render = Render.create({
 Render.run(render);
 Runner.run(Runner.create(), engine);
 
-
+World.add(world, MouseConstraint.create(engine, {
+    mouse: Mouse.create(render.canvas)
+}));
 
 // Walls
 
 const walls = [
-    Bodies.rectangle(width / 2, 0, width, 1, { isStatic: true }),
-    Bodies.rectangle(width / 2, height, width, 1, { isStatic: true }),
-    Bodies.rectangle(0, height / 2, 1, height, { isStatic: true }),
-    Bodies.rectangle(width, height / 2, 1, height, { isStatic: true })
+    Bodies.rectangle(width / 2, 0, width, 10, { isStatic: true }),
+    Bodies.rectangle(width / 2, height, width, 10, { isStatic: true }),
+    Bodies.rectangle(0, height / 2, 10, height, { isStatic: true }),
+    Bodies.rectangle(width, height / 2, 10, height, { isStatic: true })
 
 ];
 World.add(world, walls)
@@ -174,16 +176,21 @@ const ball = Bodies.circle(unitLength / 2, unitLength / 2, unitLength / 3);
 World.add(world, ball);
 
 document.addEventListener('keydown', event => {
+    const { x, y } = ball.velocity;
+
     if (event.keyCode === 87) {
-
+        Body.setVelocity(ball, { x, y: y - 5 });
     }
+
     if (event.keyCode === 68) {
-
+        Body.setVelocity(ball, { x: x + 5, y });
     }
+
     if (event.keyCode === 83) {
-
+        Body.setVelocity(ball, { x, y: y + 5 });
     }
-    if (event.keyCode === 65) {
 
+    if (event.keyCode === 65) {
+        Body.setVelocity(ball, { x: x - 5, y });
     }
 });
