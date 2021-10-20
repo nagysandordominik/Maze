@@ -1,12 +1,12 @@
 const { Engine, Render, Runner, World, Bodies, Body, MouseConstraint, Mouse, Events } = Matter;
 
-const cellsHorizontal = 14;
-const cellsVertical = 10;
+const cellsHorizontal = 18;
+const cellsVertical = 15;
 const width = window.innerWidth;
 const height = window.innerHeight;
 
 const unitLengthX = width / cellsHorizontal;
-const unitLengthY = width / cellsVertical;
+const unitLengthY = height / cellsVertical;
 
 const engine = Engine.create();
 engine.world.gravity.y = 0;
@@ -174,7 +174,7 @@ const goal = Bodies.rectangle(
     width - unitLengthX / 2,
     height - unitLengthY / 2,
     unitLengthX * 0.5,
-    unitLengthY * 0.3,
+    unitLengthY * 0.7,
     {
         label: 'goal',
         isStatic: true,
@@ -220,6 +220,7 @@ Events.on(engine, 'collisionStart', event => {
         labels.includes(collision.bodyA.label) &&
         labels.includes(collision.bodyB.label)
     ) {
+        document.querySelector('.winner').classList.remove('hidden');
         world.gravity.y = 1;
         world.bodies.forEach(body => {
             if (body.label === 'wall') {
